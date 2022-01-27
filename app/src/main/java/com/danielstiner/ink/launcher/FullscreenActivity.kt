@@ -54,6 +54,10 @@ class FullscreenActivity : AppCompatActivity() {
             })
         }
 
+        binding.actionButton2.setOnClickListener {
+            startActivity(packageManager.getLaunchIntentForPackage("com.amazon.kindle"))
+        }
+
         binding.actionButton3.setOnClickListener {
             startActivity(Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_MUSIC).apply {
                 addFlags(FLAG_ACTIVITY_NEW_TASK)
