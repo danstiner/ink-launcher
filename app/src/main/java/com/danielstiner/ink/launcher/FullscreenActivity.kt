@@ -44,6 +44,10 @@ class FullscreenActivity : AppCompatActivity() {
             })
         }
 
+        binding.weatherText.setOnClickListener {
+            startActivity(packageManager.getLaunchIntentForPackage("co.climacell.climacell"))
+        }
+
         binding.actionButton1.setOnClickListener {
             startActivity(Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_MAPS).apply {
                 addFlags(FLAG_ACTIVITY_NEW_TASK)
@@ -56,10 +60,23 @@ class FullscreenActivity : AppCompatActivity() {
             })
         }
 
+        binding.actionButton4.setOnClickListener {
+            startActivity(packageManager.getLaunchIntentForPackage("com.google.android.keep"))
+        }
+
         binding.bottomLeftButton.setOnClickListener {
             startActivity(Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_MESSAGING).apply {
                 addFlags(FLAG_ACTIVITY_NEW_TASK)
             })
+        }
+
+        val appDrawerFragment = AppDrawerFragment()
+        binding.bottomCenterButton.setOnClickListener {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, appDrawerFragment)
+                .addToBackStack(null)
+                .commit()
         }
 
         binding.bottomRightButton.setOnClickListener {
