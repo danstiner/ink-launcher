@@ -1,14 +1,13 @@
 <resources>
 
     <style name="Widget.Theme.InkLauncher.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
+<!--        <item name="android:background">@color/black_overlay</item>-->
     </style>
 
     <style name="Widget.Theme.InkLauncher.ButtonBar.Fullscreen" parent="">
-        <item name="android:background">@color/black_overlay</item>
-        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+<!--        <item name="android:background">@color/black_overlay</item>-->
+<!--        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>-->
     </style>
-
 
     <style name="ActionButton" parent="Widget.Material3.Button.TextButton">
         <item name="android:textSize">48dp</item>
