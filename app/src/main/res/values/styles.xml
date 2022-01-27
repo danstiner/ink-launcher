@@ -8,4 +8,13 @@
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
     </style>
+
+
+    <style name="ActionButton" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textSize">48dp</item>
+    </style>
+
+    <style name="IconButton" parent="Widget.Material3.Button.IconButton">
+        <item name="iconSize">32dp</item>
+    </style>
 </resources>
