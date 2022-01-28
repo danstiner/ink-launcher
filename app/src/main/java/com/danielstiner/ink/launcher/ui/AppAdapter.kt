@@ -1,4 +1,4 @@
-package com.danielstiner.ink.launcher.ui.app_drawer
+package com.danielstiner.ink.launcher.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

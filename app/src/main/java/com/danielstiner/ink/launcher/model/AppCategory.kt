@@ -8,7 +8,12 @@ import androidx.annotation.RequiresApi
 /**
  * See https://developer.android.com/reference/android/content/pm/ApplicationInfo#category
  */
-data class AppCategory(private val value: Int) {
+data class AppCategory(val value: Int) {
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun getTitle(context: Context) = ApplicationInfo.getCategoryTitle(context, value)
+
+    companion object {
+        val MESSAGING = AppCategory(ApplicationInfo.CATEGORY_SOCIAL)
+    }
 }

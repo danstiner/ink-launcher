@@ -15,6 +15,7 @@
 
     <style name="Theme.InkLauncher.Fullscreen" parent="Theme.InkLauncher">
         <item name="android:actionBarStyle">@style/Widget.Theme.InkLauncher.ActionBar.Fullscreen</item>
+        <item name="textAppearanceListItem">@style/TextAppearance.AppCompat.Large</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowBackground">@null</item>
     </style>

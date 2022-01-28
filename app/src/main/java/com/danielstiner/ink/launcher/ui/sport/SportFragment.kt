@@ -1,4 +1,4 @@
-package com.danielstiner.ink.launcher.ui.app_drawer
+package com.danielstiner.ink.launcher.ui.sport
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.danielstiner.ink.launcher.ui.MainViewModelFactory
 import com.danielstiner.ink.launcher.databinding.FragmentAppDrawerBinding
 import com.danielstiner.ink.launcher.ui.AppAdapter
 
-class AppDrawerFragment : Fragment() {
+class SportFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by activityViewModels {
         MainViewModelFactory(requireContext())

@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.danielstiner.ink.launcher.R
 import com.danielstiner.ink.launcher.databinding.FragmentMainBinding
+import com.danielstiner.ink.launcher.model.AppCategory
 import java.util.*
 
 class MainFragment : Fragment() {
@@ -79,17 +80,18 @@ class MainFragment : Fragment() {
         }
 
         binding.bottomLeftButton.setOnClickListener {
-            startActivity(
-                Intent.makeMainSelectorActivity(
-                    Intent.ACTION_MAIN,
-                    Intent.CATEGORY_APP_MESSAGING
-                ).apply {
-                    addFlags(FLAG_ACTIVITY_NEW_TASK)
-                })
+            findNavController().navigate(MainFragmentDirections.actionMainToCategory(AppCategory.MESSAGING.value))
+//            startActivity(
+//                Intent.makeMainSelectorActivity(
+//                    Intent.ACTION_MAIN,
+//                    Intent.CATEGORY_APP_MESSAGING
+//                ).apply {
+//                    addFlags(FLAG_ACTIVITY_NEW_TASK)
+//                })
         }
 
         binding.bottomCenterButton.setOnClickListener {
-            findNavController().navigate(R.id.action_main_to_drawer)
+            findNavController().navigate(MainFragmentDirections.actionMainToDrawer())
         }
 
         binding.bottomRightButton.setOnClickListener {

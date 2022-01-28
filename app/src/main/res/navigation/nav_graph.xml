@@ -12,6 +12,10 @@
         <action android:id="@+id/action_main_to_drawer"
             app:destination="@id/app_drawer"
             app:launchSingleTop="true" />
+        <action android:id="@+id/action_main_to_category"
+            app:destination="@id/category"
+            app:launchSingleTop="true">
+        </action>
     </fragment>
 
     <fragment android:id="@+id/app_drawer"
@@ -20,6 +24,16 @@
         tools:layout="@layout/fragment_app_drawer">
         <action android:id="@+id/action_drawer_to_main"
             app:destination="@id/main"/>
+    </fragment>
+
+    <fragment android:id="@+id/category"
+        android:name="com.danielstiner.ink.launcher.ui.category.CategoryFragment"
+        android:label="category"
+        tools:layout="@layout/fragment_category">
+        <argument
+            android:name="category"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 
 </navigation>
