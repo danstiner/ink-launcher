@@ -1,4 +1,4 @@
-package com.danielstiner.ink.launcher
+package com.danielstiner.ink.launcher.ui
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

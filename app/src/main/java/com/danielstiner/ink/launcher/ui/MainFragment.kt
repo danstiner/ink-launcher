@@ -1,38 +1,41 @@
-package com.danielstiner.ink.launcher
+package com.danielstiner.ink.launcher.ui
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
-import com.danielstiner.ink.launcher.databinding.ActivityMainBinding
-import com.danielstiner.ink.launcher.drawer.app.AppDrawerFragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.danielstiner.ink.launcher.R
+import com.danielstiner.ink.launcher.databinding.FragmentMainBinding
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainFragment : Fragment() {
 
-    private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(this)
+    private val viewModel: MainViewModel by activityViewModels {
+        MainViewModelFactory(requireContext())
     }
 
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: FragmentMainBinding? = null
 
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    // This property is only valid between onCreateView and onDestroyView
+    private val binding get() = _binding!!
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        val root = binding.root
 
-        hide()
+        val packageManager = requireContext().packageManager
 
         // TODO refresh when date changes
         binding.dateText.text =
-            android.text.format.DateFormat.getMediumDateFormat(this).format(Date())
+            android.text.format.DateFormat.getMediumDateFormat(requireContext()).format(Date())
         binding.dateText.setOnClickListener {
             startActivity(
                 Intent.makeMainSelectorActivity(
@@ -85,13 +88,8 @@ class MainActivity : AppCompatActivity() {
                 })
         }
 
-        val appDrawerFragment = AppDrawerFragment()
         binding.bottomCenterButton.setOnClickListener {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, appDrawerFragment)
-                .addToBackStack(null)
-                .commit()
+            findNavController().navigate(R.id.action_main_to_drawer)
         }
 
         binding.bottomRightButton.setOnClickListener {
@@ -103,13 +101,7 @@ class MainActivity : AppCompatActivity() {
                     addFlags(FLAG_ACTIVITY_NEW_TASK)
                 })
         }
-    }
 
-    private fun hide() {
-        supportActionBar?.hide()
-        ViewCompat.getWindowInsetsController(window.decorView)?.apply {
-            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            hide(WindowInsetsCompat.Type.systemBars())
-        }
+        return root
     }
 }

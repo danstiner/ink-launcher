@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/main">
+
+    <fragment android:id="@+id/main"
+        android:name="com.danielstiner.ink.launcher.ui.MainFragment"
+        android:label="main"
+        tools:layout="@layout/fragment_main">
+        <action android:id="@+id/action_main_to_drawer"
+            app:destination="@id/app_drawer"
+            app:launchSingleTop="true" />
+    </fragment>
+
+    <fragment android:id="@+id/app_drawer"
+        android:name="com.danielstiner.ink.launcher.ui.app_drawer.AppDrawerFragment"
+        android:label="app_drawer"
+        tools:layout="@layout/fragment_app_drawer">
+        <action android:id="@+id/action_drawer_to_main"
+            app:destination="@id/main"/>
+    </fragment>
+
+</navigation>

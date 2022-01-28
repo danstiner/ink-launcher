@@ -1,4 +1,4 @@
-package com.danielstiner.ink.launcher.drawer.app
+package com.danielstiner.ink.launcher.ui.app_drawer
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.danielstiner.ink.launcher.MainViewModel
-import com.danielstiner.ink.launcher.MainViewModelFactory
+import com.danielstiner.ink.launcher.ui.MainViewModel
+import com.danielstiner.ink.launcher.ui.MainViewModelFactory
 import com.danielstiner.ink.launcher.databinding.FragmentAppDrawerBinding
 
-
-/**
- * A fragment representing a list of Items.
- */
 class AppDrawerFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by activityViewModels {
@@ -29,7 +25,7 @@ class AppDrawerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAppDrawerBinding.inflate(inflater, container, false)
         val root = binding.root
         val list: RecyclerView = binding.list

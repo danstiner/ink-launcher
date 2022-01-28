@@ -11,4 +11,4 @@
     android:background="@color/black"
     app:layoutManager="LinearLayoutManager"
     tools:listitem="@layout/app_item"
-    tools:context=".drawer.app.AppDrawerFragment" />
+    tools:context=".ui.app_drawer.AppDrawerFragment" />

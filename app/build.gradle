@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -36,8 +37,8 @@ android {
 }
 
 dependencies {
-    def nav_version = "2.3.5"
-    def lifecycle_version = "2.4.0"
+    def nav_version = '2.4.0'
+    def lifecycle_version = '2.4.0'
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

@@ -1,4 +1,4 @@
-package com.danielstiner.ink.launcher.drawer.app
+package com.danielstiner.ink.launcher.ui.app_drawer
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.danielstiner.ink.launcher.AppItem
+import com.danielstiner.ink.launcher.model.AppItem
 import com.danielstiner.ink.launcher.databinding.AppItemBinding
 
 class AppAdapter : ListAdapter<AppItem, AppAdapter.ViewHolder>(DiffCallback) {
