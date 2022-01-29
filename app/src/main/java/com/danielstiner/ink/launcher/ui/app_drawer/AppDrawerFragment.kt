@@ -6,16 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.danielstiner.ink.launcher.ui.MainViewModel
-import com.danielstiner.ink.launcher.ui.MainViewModelFactory
 import com.danielstiner.ink.launcher.databinding.FragmentAppDrawerBinding
 import com.danielstiner.ink.launcher.ui.AppAdapter
+import com.danielstiner.ink.launcher.ui.SharedViewModel
+import com.danielstiner.ink.launcher.ui.SharedViewModelFactory
 
 class AppDrawerFragment : Fragment() {
 
-    private val mainViewModel: MainViewModel by activityViewModels {
-        MainViewModelFactory(requireContext())
+    private val viewModel: SharedViewModel by activityViewModels {
+        SharedViewModelFactory(requireContext())
     }
 
     private var _binding: FragmentAppDrawerBinding? = null
@@ -31,10 +32,17 @@ class AppDrawerFragment : Fragment() {
         val root = binding.root
         val list: RecyclerView = binding.list
 
-        val adapter = AppAdapter()
+        val adapter = AppAdapter { appItem ->
+            requireContext().startActivity(
+                requireContext().packageManager
+                    .getLaunchIntentForPackage(appItem.packageName.toString())
+            )
+            findNavController().navigateUp()
+//            requireActivity().supportFragmentManager.popBackStack()
+        }
         list.adapter = adapter
 
-        mainViewModel.apps.observe(viewLifecycleOwner, { apps ->
+        viewModel.apps.observe(viewLifecycleOwner, { apps ->
             adapter.submitList(apps)
         })
 

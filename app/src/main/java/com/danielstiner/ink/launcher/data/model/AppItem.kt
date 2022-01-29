@@ -1,4 +1,4 @@
-package com.danielstiner.ink.launcher.model
+package com.danielstiner.ink.launcher.data.model
 
 data class AppItem(
     val label: CharSequence,

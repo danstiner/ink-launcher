@@ -1,4 +1,4 @@
-package com.danielstiner.ink.launcher.ui
+package com.danielstiner.ink.launcher.ui.category
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,15 +6,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.danielstiner.ink.launcher.data.model.AppItem
-import com.danielstiner.ink.launcher.databinding.AppItemBinding
+import com.danielstiner.ink.launcher.data.model.AppCategory
+import com.danielstiner.ink.launcher.databinding.CategoryItemBinding
 
-class AppAdapter(private val onClick: (AppItem) -> Unit) :
-    ListAdapter<AppItem, AppAdapter.ViewHolder>(DiffCallback) {
+class CategoryAdapter(private val onClick: (AppCategory) -> Unit) :
+    ListAdapter<AppCategory, CategoryAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            AppItemBinding.inflate(
+            CategoryItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -27,24 +27,26 @@ class AppAdapter(private val onClick: (AppItem) -> Unit) :
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(binding: AppItemBinding, val onClick: (AppItem) -> Unit) :
+    inner class ViewHolder(binding: CategoryItemBinding, val onClick: (AppCategory) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         private val contentView: TextView = binding.content
-        private var currentItem: AppItem? = null
+        private var currentItem: AppCategory? = null
 
         init {
             binding.root.setOnClickListener { onClick(currentItem!!) }
         }
 
-        fun bind(item: AppItem) {
+        fun bind(item: AppCategory) {
             currentItem = item
             contentView.text = item.label
         }
     }
 
-    object DiffCallback : DiffUtil.ItemCallback<AppItem>() {
-        override fun areItemsTheSame(oldItem: AppItem, newItem: AppItem) = oldItem === newItem
-        override fun areContentsTheSame(oldItem: AppItem, newItem: AppItem) =
-            oldItem.packageName == newItem.packageName
+    object DiffCallback : DiffUtil.ItemCallback<AppCategory>() {
+        override fun areItemsTheSame(oldItem: AppCategory, newItem: AppCategory) =
+            oldItem === newItem
+
+        override fun areContentsTheSame(oldItem: AppCategory, newItem: AppCategory) =
+            oldItem.id == newItem.id
     }
 }

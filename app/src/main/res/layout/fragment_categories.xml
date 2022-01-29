@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="bottomLeftButton,bottomCenterButton,bottomRightButton" />
+        app:constraint_referenced_ids="bottomLeftButton,bottomRightButton" />
 
     <Button
         android:id="@+id/bottomLeftButton"

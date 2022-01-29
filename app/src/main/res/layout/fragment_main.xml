@@ -7,23 +7,11 @@
     android:background="@color/black">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="11:11"
-        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/dateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,8 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="☁ ?° F"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:text=""
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dateText" />
@@ -51,7 +39,7 @@
         style="@style/ActionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Explore"
+        android:text="Go"
         app:layout_constraintBottom_toTopOf="@id/actionButton2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +51,7 @@
         style="@style/ActionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Read"
+        android:text="Workout"
         app:layout_constraintBottom_toTopOf="@id/actionButton3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +73,7 @@
         style="@style/ActionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Note"
+        android:text="Capture"
         app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

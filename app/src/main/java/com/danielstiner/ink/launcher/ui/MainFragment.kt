@@ -9,15 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.danielstiner.ink.launcher.R
+import com.danielstiner.ink.launcher.data.model.AppCategory
 import com.danielstiner.ink.launcher.databinding.FragmentMainBinding
-import com.danielstiner.ink.launcher.model.AppCategory
 import java.util.*
 
 class MainFragment : Fragment() {
 
-    private val viewModel: MainViewModel by activityViewModels {
-        MainViewModelFactory(requireContext())
+    private val viewModel: SharedViewModel by activityViewModels {
+        SharedViewModelFactory(requireContext())
     }
 
     private var _binding: FragmentMainBinding? = null
@@ -47,51 +46,35 @@ class MainFragment : Fragment() {
                 })
         }
 
+        viewModel.weather.observe(this) {
+            binding.weatherText.text = it
+        }
         binding.weatherText.setOnClickListener {
             startActivity(packageManager.getLaunchIntentForPackage("co.climacell.climacell"))
         }
 
         binding.actionButton1.setOnClickListener {
-            startActivity(
-                Intent.makeMainSelectorActivity(
-                    Intent.ACTION_MAIN,
-                    Intent.CATEGORY_APP_MAPS
-                ).apply {
-                    addFlags(FLAG_ACTIVITY_NEW_TASK)
-                })
+            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.GO.id))
         }
 
         binding.actionButton2.setOnClickListener {
-            startActivity(packageManager.getLaunchIntentForPackage("com.amazon.kindle"))
+            findNavController().navigate(MainFragmentDirections.actionToWorkout())
         }
 
         binding.actionButton3.setOnClickListener {
-            startActivity(
-                Intent.makeMainSelectorActivity(
-                    Intent.ACTION_MAIN,
-                    Intent.CATEGORY_APP_MUSIC
-                ).apply {
-                    addFlags(FLAG_ACTIVITY_NEW_TASK)
-                })
+            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.LISTEN.id))
         }
 
         binding.actionButton4.setOnClickListener {
-            startActivity(packageManager.getLaunchIntentForPackage("com.google.android.keep"))
+            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.CAPTURE.id))
         }
 
         binding.bottomLeftButton.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionMainToCategory(AppCategory.MESSAGING.value))
-//            startActivity(
-//                Intent.makeMainSelectorActivity(
-//                    Intent.ACTION_MAIN,
-//                    Intent.CATEGORY_APP_MESSAGING
-//                ).apply {
-//                    addFlags(FLAG_ACTIVITY_NEW_TASK)
-//                })
+            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.MESSAGE.id))
         }
 
         binding.bottomCenterButton.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionMainToDrawer())
+            findNavController().navigate(MainFragmentDirections.actionToCategories())
         }
 
         binding.bottomRightButton.setOnClickListener {

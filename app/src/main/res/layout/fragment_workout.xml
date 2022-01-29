@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="☁ ?° F"
+        android:text=""
         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
         style="@style/ActionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Run"
+        android:text="Read"
         app:layout_constraintBottom_toTopOf="@id/actionButton3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
         style="@style/ActionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="Record"
         app:layout_constraintBottom_toTopOf="@id/actionButton4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,18 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="bottomLeftButton,bottomCenterButton,bottomRightButton" />
-
-    <Button
-        android:id="@+id/bottomLeftButton"
-        style="@style/IconButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
-        app:icon="@drawable/ic_outline_textsms_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:constraint_referenced_ids="bottomCenterButton" />
 
     <Button
         android:id="@+id/bottomCenterButton"
@@ -119,16 +108,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/bottomRightButton"
-        style="@style/IconButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        app:icon="@drawable/ic_outline_phone_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
