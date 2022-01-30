@@ -36,11 +36,11 @@ class CategoryFragment : Fragment() {
         val list: RecyclerView = binding.list
 
         val adapter = AppAdapter { appItem ->
+            findNavController().navigate(CategoryFragmentDirections.actionToMain())
             requireContext().startActivity(
                 requireContext().packageManager
                     .getLaunchIntentForPackage(appItem.packageName.toString())
             )
-            findNavController().navigateUp()
         }
         list.adapter = adapter
 

@@ -9,33 +9,28 @@
         android:name="com.danielstiner.ink.launcher.ui.MainFragment"
         android:label="main"
         tools:layout="@layout/fragment_main">
-        <action android:id="@+id/action_to_drawer"
-            app:destination="@id/app_drawer"
-            app:launchSingleTop="true"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/main" />
-        <action android:id="@+id/action_to_category"
-            app:destination="@id/category"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/main" />
-        <action android:id="@+id/action_to_categories"
-            app:destination="@id/categories"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/main" />
-        <action android:id="@+id/action_to_workout"
-            app:destination="@id/workout"
-            app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_to_drawer"
+            app:destination="@id/app_drawer" />
+        <action
+            android:id="@+id/action_to_category"
+            app:destination="@id/category" />
+        <action
+            android:id="@+id/action_to_categories"
+            app:destination="@id/categories" />
+        <action
+            android:id="@+id/action_to_workout"
+            app:destination="@id/workout" />
     </fragment>
 
     <fragment android:id="@+id/app_drawer"
         android:name="com.danielstiner.ink.launcher.ui.app_drawer.AppDrawerFragment"
         android:label="app_drawer"
         tools:layout="@layout/fragment_app_drawer">
-        <action android:id="@+id/action_drawer_to_main"
-            app:destination="@id/main" />
     </fragment>
 
-    <fragment android:id="@+id/category"
+    <fragment
+        android:id="@+id/category"
         android:name="com.danielstiner.ink.launcher.ui.category.CategoryFragment"
         android:label="category"
         tools:layout="@layout/fragment_category">
@@ -43,16 +38,21 @@
             android:name="category"
             app:argType="integer"
             android:defaultValue="0" />
+
+        <action
+            android:id="@+id/action_to_main"
+            app:destination="@id/main"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/main" />
     </fragment>
 
     <fragment android:id="@+id/categories"
         android:name="com.danielstiner.ink.launcher.ui.category.CategoriesFragment"
         android:label="categories"
         tools:layout="@layout/fragment_categories">
-        <action android:id="@+id/action_to_category"
-            app:destination="@id/category"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/main" />
+        <action
+            android:id="@+id/action_to_category"
+            app:destination="@id/category" />
     </fragment>
 
     <fragment android:id="@+id/workout"
