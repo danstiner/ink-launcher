@@ -10,7 +10,7 @@
     </style>
 
     <style name="ActionButton" parent="Widget.Material3.Button.TextButton">
-        <item name="android:textSize">48dp</item>
+        <item name="android:textSize">@dimen/m3_sys_typescale_display_medium_text_size</item>
     </style>
 
     <style name="IconButton" parent="Widget.Material3.Button.IconButton">

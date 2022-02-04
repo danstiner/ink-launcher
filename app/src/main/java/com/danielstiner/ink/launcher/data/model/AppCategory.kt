@@ -21,13 +21,12 @@ data class AppCategory(val id: Int, val label: String) {
         val GO = AppCategory(5, label = "Go")
 
         // Sub-categories of ApplicationInfo.CATEGORY_NEWS
-        val NEWS = AppCategory(6, label = "News")
 
         // Sub-categories of
 
         // Sub-categories of ApplicationInfo.CATEGORY_SOCIAL
         val MESSAGE = AppCategory(8, label = "Message")
-        val SOCIAL = AppCategory(9, label = "Social")
+        val SOCIAL = AppCategory(9, label = "Socialize")
 
         // Sub-categories of ApplicationInfo.CATEGORY_UNDEFINED
         val UNDEFINED = AppCategory(11, label = "Other")
@@ -40,6 +39,8 @@ data class AppCategory(val id: Int, val label: String) {
 
         // Sub-categories of ApplicationInfo.CATEGORY_VIDEO
         val WATCH = AppCategory(20, label = "Watch")
+
+        val WELLBEING = AppCategory(6, label = "Well-being")
 
         // Aliases
         val ACCESSIBILITY = UNDEFINED
@@ -56,22 +57,23 @@ data class AppCategory(val id: Int, val label: String) {
         val OUTSIDE = GO
         val HIKE = WORKOUT
         val FLY = GO
+        val NEWS = UNDEFINED
 
         // All
         val ALL = listOf(
-            GO,
-            CAPTURE,
+//            CAPTURE, // Already on home fragment
+//            GO, // Already on home fragment
+//            LISTEN, // Already on home fragment
+//            MESSAGE, // Already on home fragment
+//            WORKOUT, // Already on home fragment
             CALL,
             CREATE,
-            LISTEN,
-            MESSAGE,
-            WORKOUT,
-            PLAN,
-            LEARN,
             GAME,
-            WATCH,
-            NEWS,
+            LEARN,
+            PLAN,
             SOCIAL,
+            WATCH,
+            WELLBEING,
             UNDEFINED,
         )
     }
