@@ -33,6 +33,8 @@ class MainFragment : Fragment() {
 
         val packageManager = requireContext().packageManager
 
+        val globalSwipeDetector = GlobalSwipeDetector(requireContext(), findNavController())
+
         // TODO refresh when date changes
         binding.dateText.text =
             android.text.format.DateFormat.getMediumDateFormat(requireContext()).format(Date())
@@ -45,6 +47,7 @@ class MainFragment : Fragment() {
                     addFlags(FLAG_ACTIVITY_NEW_TASK)
                 })
         }
+        binding.dateText.setOnTouchListener(globalSwipeDetector)
 
         viewModel.weather.observe(this) {
             binding.weatherText.text = it
@@ -52,30 +55,37 @@ class MainFragment : Fragment() {
         binding.weatherText.setOnClickListener {
             startActivity(packageManager.getLaunchIntentForPackage("co.climacell.climacell"))
         }
+        binding.weatherText.setOnTouchListener(globalSwipeDetector)
 
         binding.actionButton1.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.GO.id))
         }
+        binding.actionButton1.setOnTouchListener(globalSwipeDetector)
 
         binding.actionButton2.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionToWorkout())
         }
+        binding.actionButton2.setOnTouchListener(globalSwipeDetector)
 
         binding.actionButton3.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.LISTEN.id))
         }
+        binding.actionButton3.setOnTouchListener(globalSwipeDetector)
 
         binding.actionButton4.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.CAPTURE.id))
         }
+        binding.actionButton4.setOnTouchListener(globalSwipeDetector)
 
         binding.bottomLeftButton.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.MESSAGE.id))
         }
+        binding.bottomLeftButton.setOnTouchListener(globalSwipeDetector)
 
         binding.bottomCenterButton.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionToCategories())
         }
+        binding.bottomCenterButton.setOnTouchListener(globalSwipeDetector)
 
         binding.bottomRightButton.setOnClickListener {
             startActivity(
@@ -86,6 +96,7 @@ class MainFragment : Fragment() {
                     addFlags(FLAG_ACTIVITY_NEW_TASK)
                 })
         }
+        binding.bottomRightButton.setOnTouchListener(globalSwipeDetector)
 
         return root
     }

@@ -4,10 +4,12 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.navigation.fragment.NavHostFragment
 import com.danielstiner.ink.launcher.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var globalSwipeDetector: GlobalSwipeDetector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +27,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
+        globalSwipeDetector = GlobalSwipeDetector(
+            this,
+            binding.root.getFragment<NavHostFragment>().navController
+        )
 
+        supportActionBar?.hide()
 
         val locationPermissionRequest = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
@@ -41,9 +48,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Before you perform the actual permission request, check whether your app
-        // already has the permissions, and whether your app needs to show a permission
-        // rationale dialog. For more details, see Request permissions.
+        // Before doing the actual permission request, check if we already have the permission
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -56,6 +61,9 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
+
+    override fun onTouchEvent(event: MotionEvent) =
+        globalSwipeDetector.onTouchEvent(event) || super.onTouchEvent(event)
 
     companion object {
         private const val TAG = "MainActivity"

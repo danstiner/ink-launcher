@@ -55,10 +55,16 @@
             app:destination="@id/category" />
     </fragment>
 
-    <fragment android:id="@+id/workout"
+    <fragment
+        android:id="@+id/workout"
         android:name="com.danielstiner.ink.launcher.ui.workout.WorkoutFragment"
         android:label="workout"
-        tools:layout="@layout/fragment_workout">
-    </fragment>
+        tools:layout="@layout/fragment_workout"></fragment>
+
+    <fragment
+        android:id="@+id/recent"
+        android:name="com.danielstiner.ink.launcher.ui.recent.RecentFragment"
+        android:label="workout"
+        tools:layout="@layout/fragment_recent"></fragment>
 
 </navigation>
