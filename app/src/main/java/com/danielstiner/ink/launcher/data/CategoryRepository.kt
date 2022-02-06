@@ -5,7 +5,8 @@ import android.content.pm.ResolveInfo
 import android.os.Build
 import com.danielstiner.ink.launcher.data.model.AppCategory
 
-class Categorizer {
+class CategoryRepository {
+
     fun categorize(info: ResolveInfo): AppCategory {
         val packageName = info.activityInfo.packageName
         return when {

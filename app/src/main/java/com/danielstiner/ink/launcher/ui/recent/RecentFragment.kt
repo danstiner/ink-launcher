@@ -10,7 +10,9 @@ import androidx.fragment.app.activityViewModels
 import com.danielstiner.ink.launcher.databinding.FragmentWorkoutBinding
 import com.danielstiner.ink.launcher.ui.SharedViewModel
 import com.danielstiner.ink.launcher.ui.SharedViewModelFactory
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 class RecentFragment : Fragment() {
 
     private val viewModel: SharedViewModel by activityViewModels {
@@ -31,8 +33,8 @@ class RecentFragment : Fragment() {
 
         val packageManager = requireContext().packageManager
 
-        viewModel.weather.observe(this) {
-            binding.weatherText.text = it
+        viewModel.weather.observe(this) { weather ->
+            binding.weatherText.text = weather?.toDisplayString() ?: ""
         }
         binding.weatherText.setOnClickListener {
             startActivity(packageManager.getLaunchIntentForPackage("co.climacell.climacell"))

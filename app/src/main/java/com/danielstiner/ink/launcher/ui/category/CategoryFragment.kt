@@ -13,7 +13,9 @@ import com.danielstiner.ink.launcher.databinding.FragmentCategoryBinding
 import com.danielstiner.ink.launcher.ui.AppAdapter
 import com.danielstiner.ink.launcher.ui.SharedViewModel
 import com.danielstiner.ink.launcher.ui.SharedViewModelFactory
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 class CategoryFragment : Fragment() {
 
     val args: CategoryFragmentArgs by navArgs()

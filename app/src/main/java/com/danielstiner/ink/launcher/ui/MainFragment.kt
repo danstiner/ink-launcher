@@ -1,8 +1,8 @@
 package com.danielstiner.ink.launcher.ui
 
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
+import android.text.format.DateFormat.getMediumDateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +11,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.danielstiner.ink.launcher.data.model.AppCategory
 import com.danielstiner.ink.launcher.databinding.FragmentMainBinding
-import java.util.*
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 class MainFragment : Fragment() {
 
     private val viewModel: SharedViewModel by activityViewModels {
@@ -32,25 +33,25 @@ class MainFragment : Fragment() {
         val root = binding.root
 
         val packageManager = requireContext().packageManager
-
+        val dateFormat = getMediumDateFormat(requireContext())
         val globalSwipeDetector = GlobalSwipeDetector(requireContext(), findNavController())
 
-        // TODO refresh when date changes
-        binding.dateText.text =
-            android.text.format.DateFormat.getMediumDateFormat(requireContext()).format(Date())
+
+        viewModel.localDate.observe(this) { date ->
+            binding.dateText.text = dateFormat.format(date)
+        }
         binding.dateText.setOnClickListener {
             startActivity(
                 Intent.makeMainSelectorActivity(
                     Intent.ACTION_MAIN,
                     Intent.CATEGORY_APP_CALENDAR
-                ).apply {
-                    addFlags(FLAG_ACTIVITY_NEW_TASK)
-                })
+                )
+            )
         }
         binding.dateText.setOnTouchListener(globalSwipeDetector)
 
-        viewModel.weather.observe(this) {
-            binding.weatherText.text = it
+        viewModel.weather.observe(this) { weather ->
+            binding.weatherText.text = weather?.toDisplayString() ?: ""
         }
         binding.weatherText.setOnClickListener {
             startActivity(packageManager.getLaunchIntentForPackage("co.climacell.climacell"))
@@ -92,9 +93,8 @@ class MainFragment : Fragment() {
                 Intent.makeMainSelectorActivity(
                     Intent.ACTION_DIAL,
                     Intent.CATEGORY_DEFAULT
-                ).apply {
-                    addFlags(FLAG_ACTIVITY_NEW_TASK)
-                })
+                )
+            )
         }
         binding.bottomRightButton.setOnTouchListener(globalSwipeDetector)
 

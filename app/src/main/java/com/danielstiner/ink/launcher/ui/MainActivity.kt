@@ -11,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.NavHostFragment
 import com.danielstiner.ink.launcher.databinding.ActivityMainBinding
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: SharedViewModel by viewModels {
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             when {
                 permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
                     Log.i(TAG, "Approximate location access granted.")
-                    viewModel.fetchWeather()
+                    viewModel.onLocationAccessGranted()
                 }
                 else -> {
                     Log.w(TAG, "No location access granted")

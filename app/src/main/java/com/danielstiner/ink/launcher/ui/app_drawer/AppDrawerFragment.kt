@@ -12,7 +12,9 @@ import com.danielstiner.ink.launcher.databinding.FragmentAppDrawerBinding
 import com.danielstiner.ink.launcher.ui.AppAdapter
 import com.danielstiner.ink.launcher.ui.SharedViewModel
 import com.danielstiner.ink.launcher.ui.SharedViewModelFactory
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 class AppDrawerFragment : Fragment() {
 
     private val viewModel: SharedViewModel by activityViewModels {
