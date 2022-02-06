@@ -84,7 +84,12 @@ class MainFragment : Fragment() {
         binding.bottomLeftButton.setOnTouchListener(globalSwipeDetector)
 
         binding.bottomCenterButton.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionToCategories())
+            startActivity(
+                Intent.makeMainSelectorActivity(
+                    Intent.ACTION_MAIN,
+                    Intent.CATEGORY_APP_MUSIC
+                )
+            )
         }
         binding.bottomCenterButton.setOnTouchListener(globalSwipeDetector)
 
