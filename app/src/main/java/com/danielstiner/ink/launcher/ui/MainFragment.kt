@@ -32,20 +32,17 @@ class MainFragment : Fragment() {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val root = binding.root
 
-        val packageManager = requireContext().packageManager
         val dateFormat = getMediumDateFormat(requireContext())
         val globalSwipeDetector = GlobalSwipeDetector(requireContext(), findNavController())
-
 
         viewModel.localDate.observe(this) { date ->
             binding.dateText.text = dateFormat.format(date)
         }
         binding.dateText.setOnClickListener {
-            startActivity(
-                Intent.makeMainSelectorActivity(
-                    Intent.ACTION_MAIN,
-                    Intent.CATEGORY_APP_CALENDAR
-                )
+            viewModel.launchSelector(
+                Intent.ACTION_MAIN,
+                Intent.CATEGORY_APP_CALENDAR,
+                requireContext()
             )
         }
         binding.dateText.setOnTouchListener(globalSwipeDetector)
@@ -54,7 +51,7 @@ class MainFragment : Fragment() {
             binding.weatherText.text = weather?.toDisplayString() ?: ""
         }
         binding.weatherText.setOnClickListener {
-            startActivity(packageManager.getLaunchIntentForPackage("co.climacell.climacell"))
+            viewModel.launchPackage("co.climacell.climacell", requireContext())
         }
         binding.weatherText.setOnTouchListener(globalSwipeDetector)
 
@@ -84,22 +81,16 @@ class MainFragment : Fragment() {
         binding.bottomLeftButton.setOnTouchListener(globalSwipeDetector)
 
         binding.bottomCenterButton.setOnClickListener {
-            startActivity(
-                Intent.makeMainSelectorActivity(
-                    Intent.ACTION_MAIN,
-                    Intent.CATEGORY_APP_MUSIC
-                )
+            viewModel.launchSelector(
+                Intent.ACTION_MAIN,
+                Intent.CATEGORY_APP_MUSIC,
+                requireContext()
             )
         }
         binding.bottomCenterButton.setOnTouchListener(globalSwipeDetector)
 
         binding.bottomRightButton.setOnClickListener {
-            startActivity(
-                Intent.makeMainSelectorActivity(
-                    Intent.ACTION_DIAL,
-                    Intent.CATEGORY_DEFAULT
-                )
-            )
+            viewModel.launchSelector(Intent.ACTION_DIAL, Intent.CATEGORY_DEFAULT, requireContext())
         }
         binding.bottomRightButton.setOnTouchListener(globalSwipeDetector)
 

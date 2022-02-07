@@ -7,6 +7,7 @@ import com.danielstiner.ink.launcher.data.AppRepository
 import com.danielstiner.ink.launcher.data.CategoryRepository
 import com.danielstiner.ink.launcher.data.LocationRepository
 import com.danielstiner.ink.launcher.data.WeatherRepository
+import com.danielstiner.ink.launcher.data.db.Database
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
@@ -15,6 +16,7 @@ class SharedViewModelFactory(private val context: Context) :
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SharedViewModel::class.java)) {
             return SharedViewModel(
+                database = Database.getInstance(context),
                 appRepository = AppRepository(
                     packageManager = context.packageManager,
                     categoryRepository = CategoryRepository()

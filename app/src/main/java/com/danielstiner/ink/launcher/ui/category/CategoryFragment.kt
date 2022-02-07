@@ -18,9 +18,9 @@ import kotlin.time.ExperimentalTime
 @ExperimentalTime
 class CategoryFragment : Fragment() {
 
-    val args: CategoryFragmentArgs by navArgs()
+    private val args: CategoryFragmentArgs by navArgs()
 
-    private val sharedViewModel: SharedViewModel by activityViewModels {
+    private val viewModel: SharedViewModel by activityViewModels {
         SharedViewModelFactory(requireContext())
     }
 
@@ -39,14 +39,11 @@ class CategoryFragment : Fragment() {
 
         val adapter = AppAdapter { appItem ->
             findNavController().navigate(CategoryFragmentDirections.actionToMain())
-            requireContext().startActivity(
-                requireContext().packageManager
-                    .getLaunchIntentForPackage(appItem.packageName.toString())
-            )
+            viewModel.launchApp(appItem, requireContext())
         }
         list.adapter = adapter
 
-        sharedViewModel.apps.observe(viewLifecycleOwner, { apps ->
+        viewModel.apps.observe(viewLifecycleOwner, { apps ->
             adapter.submitList(apps.filter { app -> app.category.id == args.category })
         })
 

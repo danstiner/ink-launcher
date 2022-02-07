@@ -1,13 +1,19 @@
 package com.danielstiner.ink.launcher.ui
 
+import android.content.Context
+import android.content.Intent
+import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.danielstiner.ink.launcher.data.AppRepository
 import com.danielstiner.ink.launcher.data.LocationRepository
 import com.danielstiner.ink.launcher.data.WeatherRepository
+import com.danielstiner.ink.launcher.data.db.Database
+import com.danielstiner.ink.launcher.data.db.Launch
 import com.danielstiner.ink.launcher.data.model.AppItem
 import com.danielstiner.ink.launcher.data.model.Weather
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.time.Duration
@@ -20,6 +26,7 @@ import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
 class SharedViewModel(
+    private val database: Database,
     private val appRepository: AppRepository,
     private val locationRepository: LocationRepository,
     private val weatherRepository: WeatherRepository
@@ -79,6 +86,53 @@ class SharedViewModel(
                 fetchWeather()
                 delay(WEATHER_REFRESH_PERIOD.toMillis())
             }
+        }
+    }
+
+    @MainThread
+    fun launchApp(
+        appItem: AppItem,
+        context: Context,
+    ) {
+        launchPackage(appItem.packageName.toString(), context)
+    }
+
+    @MainThread
+    fun launchSelector(selectorAction: String, selectorCategory: String, context: Context) {
+        launchIntent(
+            Intent.makeMainSelectorActivity(
+                selectorAction,
+                selectorCategory
+            ),
+            context
+        )
+    }
+
+    @MainThread
+    fun launchPackage(
+        packageName: String,
+        context: Context,
+    ) {
+        val intent = context.packageManager.getLaunchIntentForPackage(packageName)
+        if (intent != null) {
+            launchIntent(intent, context)
+        } else {
+            TODO("Unhandled no launch intent for package error")
+        }
+    }
+
+    @MainThread
+    private fun launchIntent(intent: Intent, context: Context) {
+        context.startActivity(intent)
+        viewModelScope.launch(Dispatchers.IO) {
+            database.launchDao().insert(
+                Launch(
+                    packageName = intent.`package`,
+                    category = intent.selector?.categories?.first(),
+                    action = intent.action,
+                    at = Instant.now()
+                )
+            )
         }
     }
 

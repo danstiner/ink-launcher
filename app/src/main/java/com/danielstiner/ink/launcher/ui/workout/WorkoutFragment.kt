@@ -31,31 +31,27 @@ class WorkoutFragment : Fragment() {
         _binding = FragmentWorkoutBinding.inflate(inflater, container, false)
         val root = binding.root
 
-        val packageManager = requireContext().packageManager
-
         viewModel.weather.observe(this) { weather ->
             binding.weatherText.text = weather?.toDisplayString() ?: ""
         }
         binding.weatherText.setOnClickListener {
-            startActivity(packageManager.getLaunchIntentForPackage("co.climacell.climacell"))
+            viewModel.launchPackage("co.climacell.climacell", requireContext())
         }
 
         binding.actionButton1.setOnClickListener {
-            startActivity(
-                Intent.makeMainSelectorActivity(
-                    Intent.ACTION_MAIN,
-                    Intent.CATEGORY_APP_MUSIC
-                ).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                })
+            viewModel.launchSelector(
+                Intent.ACTION_MAIN,
+                Intent.CATEGORY_APP_MUSIC,
+                requireContext()
+            )
         }
 
         binding.actionButton2.setOnClickListener {
-            startActivity(packageManager.getLaunchIntentForPackage("com.audible.application"))
+            viewModel.launchPackage("com.audible.application", requireContext())
         }
 
         binding.actionButton3.setOnClickListener {
-            startActivity(packageManager.getLaunchIntentForPackage("com.strava"))
+            viewModel.launchPackage("com.strava", requireContext())
         }
 
         return root

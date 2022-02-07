@@ -12,6 +12,7 @@ import com.danielstiner.ink.launcher.databinding.FragmentAppDrawerBinding
 import com.danielstiner.ink.launcher.ui.AppAdapter
 import com.danielstiner.ink.launcher.ui.SharedViewModel
 import com.danielstiner.ink.launcher.ui.SharedViewModelFactory
+import com.danielstiner.ink.launcher.ui.category.CategoryFragmentDirections
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
@@ -35,12 +36,8 @@ class AppDrawerFragment : Fragment() {
         val list: RecyclerView = binding.list
 
         val adapter = AppAdapter { appItem ->
-            requireContext().startActivity(
-                requireContext().packageManager
-                    .getLaunchIntentForPackage(appItem.packageName.toString())
-            )
-            findNavController().navigateUp()
-//            requireActivity().supportFragmentManager.popBackStack()
+            findNavController().navigate(CategoryFragmentDirections.actionToMain())
+            viewModel.launchApp(appItem, requireContext())
         }
         list.adapter = adapter
 
