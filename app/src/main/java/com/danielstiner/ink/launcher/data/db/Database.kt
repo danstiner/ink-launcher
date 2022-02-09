@@ -2,15 +2,17 @@ package com.danielstiner.ink.launcher.data.db
 
 import android.content.Context
 import androidx.annotation.AnyThread
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import androidx.room.*
+import androidx.room.migration.AutoMigrationSpec
 import java.lang.ref.WeakReference
 import java.util.concurrent.atomic.AtomicReference
 
 @androidx.room.Database(
     entities = [Launch::class],
-    version = 1,
+    version = 2,
+    autoMigrations = [
+        AutoMigration(from = 1, to = 2, spec = Database.Migration1To2::class)
+    ],
 )
 @TypeConverters(Converters::class)
 abstract class Database : RoomDatabase() {
@@ -28,7 +30,7 @@ abstract class Database : RoomDatabase() {
             if (database == null) {
                 database = Room.databaseBuilder(
                     context,
-                    Database::class.java, "database-name"
+                    Database::class.java, "database"
                 ).build()
                 INSTANCE_REF.set(WeakReference(database))
             }
@@ -36,4 +38,8 @@ abstract class Database : RoomDatabase() {
         }
 
     }
+
+    @RenameTable(fromTableName = "launch_dates", toTableName = "launches")
+    class Migration1To2 : AutoMigrationSpec
+
 }

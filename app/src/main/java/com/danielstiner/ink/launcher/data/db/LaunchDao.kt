@@ -18,6 +18,7 @@ interface LaunchDao {
     fun update(obj: Launch)
 
     @WorkerThread
-    @Query("SELECT * FROM launch_dates")
+    @Query("SELECT * FROM launches")
     fun getAll(): List<Launch>
+
 }
