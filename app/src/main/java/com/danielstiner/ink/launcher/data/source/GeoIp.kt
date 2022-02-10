@@ -12,7 +12,9 @@ import okhttp3.Response
 
 class GeoIp(private val client: OkHttpClient = OkHttpClient()) {
 
-    private suspend fun fetch(): LatLng? {
+    val format = Json { ignoreUnknownKeys = true }
+
+    suspend fun fetch(): LatLng? {
         val url = "https://ipapi.co/json/".toHttpUrl()
         val request = Request.Builder()
             .url(url)
@@ -20,15 +22,15 @@ class GeoIp(private val client: OkHttpClient = OkHttpClient()) {
             .build()
         val response: Response = client.newCall(request).executeAsync()
 
-        try {
-            val data = Json.decodeFromString<Data>(response.body!!.string())
-            return LatLng(
+        return try {
+            val data = format.decodeFromString<Data>(response.body!!.string())
+            LatLng(
                 latitude = data.latitude,
                 longitude = data.longitude
             )
         } catch (ex: kotlinx.serialization.SerializationException) {
             Log.e(TAG, "Failed to parse geo ip response", ex)
-            return null
+            null
         }
     }
 

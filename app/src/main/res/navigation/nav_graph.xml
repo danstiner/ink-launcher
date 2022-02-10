@@ -63,8 +63,8 @@
 
     <fragment
         android:id="@+id/recent"
-        android:name="com.danielstiner.ink.launcher.ui.recent.RecentFragment"
+        android:name="com.danielstiner.ink.launcher.ui.quick.QuickFragment"
         android:label="workout"
-        tools:layout="@layout/fragment_recent"></fragment>
+        tools:layout="@layout/fragment_quick"></fragment>
 
 </navigation>

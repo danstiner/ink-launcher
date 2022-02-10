@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "9f26e7c63febc095fcac06599ff4cfeb",
+    "identityHash": "f66ea0a6d948ea9638cce9c452457981",
     "entities": [
       {
         "tableName": "launches",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `package` TEXT, `category` TEXT, `action` TEXT, `at` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `package` TEXT NOT NULL, `at` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -18,19 +18,7 @@
             "fieldPath": "packageName",
             "columnName": "package",
             "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "category",
-            "columnName": "category",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "action",
-            "columnName": "action",
-            "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "at",
@@ -52,7 +40,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9f26e7c63febc095fcac06599ff4cfeb')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f66ea0a6d948ea9638cce9c452457981')"
     ]
   }
 }

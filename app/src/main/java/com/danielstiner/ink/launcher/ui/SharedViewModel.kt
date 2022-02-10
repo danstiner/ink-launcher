@@ -41,6 +41,12 @@ class SharedViewModel(
     private val _localDate = MutableLiveData<Date>()
     val localDate: LiveData<Date> = _localDate
 
+    private val _recent = MutableLiveData<AppItem>()
+    val recent: LiveData<AppItem> = _recent
+
+    private val _mostUsed = MutableLiveData<List<AppItem>>()
+    val mostUsed: LiveData<List<AppItem>> = _mostUsed
+
     private val _weather = MutableLiveData<Weather?>()
     val weather: LiveData<Weather?> = _weather
 
@@ -50,12 +56,16 @@ class SharedViewModel(
 
     fun onLocationAccessGranted() {
         viewModelScope.launch {
-            fetchWeather()
+            refreshWeather()
         }
     }
 
     private fun launchBackgroundTasks() {
 
+        // Initialize most recently used app once
+        viewModelScope.launch {
+            refreshRecentApps()
+        }
         // Keep local date updated
         // TODO take into account timezone changes
         viewModelScope.launch {
@@ -75,7 +85,16 @@ class SharedViewModel(
         // https://developer.android.com/reference/android/content/Intent#ACTION_PACKAGE_ADDED
         viewModelScope.launch {
             while (!cleared) {
-                fetchAppList()
+                refreshAppList()
+                delay(APPLIST_REFRESH_PERIOD.toMillis())
+            }
+        }
+
+        // Periodically refresh most used apps
+        // TODO Instead listen for app launch and refresh immediately
+        viewModelScope.launch {
+            while (!cleared) {
+                refreshMostUsedApps()
                 delay(APPLIST_REFRESH_PERIOD.toMillis())
             }
         }
@@ -83,7 +102,7 @@ class SharedViewModel(
         // Periodically fetch weather
         viewModelScope.launch {
             while (!cleared) {
-                fetchWeather()
+                refreshWeather()
                 delay(WEATHER_REFRESH_PERIOD.toMillis())
             }
         }
@@ -95,6 +114,17 @@ class SharedViewModel(
         context: Context,
     ) {
         launchPackage(appItem.packageName.toString(), context)
+
+        _recent.value = appItem
+
+        viewModelScope.launch(Dispatchers.IO) {
+            database.launchDao().insert(
+                Launch(
+                    packageName = appItem.packageName.toString(),
+                    at = Instant.now()
+                )
+            )
+        }
     }
 
     @MainThread
@@ -124,23 +154,25 @@ class SharedViewModel(
     @MainThread
     private fun launchIntent(intent: Intent, context: Context) {
         context.startActivity(intent)
+    }
+
+    private suspend fun refreshAppList() {
+        _apps.postValue(appRepository.getAll())
+    }
+
+    private suspend fun refreshRecentApps() {
         viewModelScope.launch(Dispatchers.IO) {
-            database.launchDao().insert(
-                Launch(
-                    packageName = intent.`package`,
-                    category = intent.selector?.categories?.first(),
-                    action = intent.action,
-                    at = Instant.now()
-                )
-            )
+            appRepository.recent(1).firstOrNull()?.let { _recent.postValue(it) }
         }
     }
 
-    private suspend fun fetchAppList() {
-        _apps.postValue(appRepository.get())
+    private suspend fun refreshMostUsedApps() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _mostUsed.postValue(appRepository.mostUsed(4))
+        }
     }
 
-    private suspend fun fetchWeather() {
+    private suspend fun refreshWeather() {
         val location = locationRepository.lastLocation()
 
         if (location == null) {
@@ -163,7 +195,7 @@ class SharedViewModel(
     companion object {
         private const val TAG = "SharedViewModel"
         private val APPLIST_REFRESH_PERIOD = Duration.ofHours(1)
-        private val WEATHER_REFRESH_PERIOD = Duration.ofHours(1)
+        private val WEATHER_REFRESH_PERIOD = Duration.ofMinutes(30)
         private val WEATHER_TIMEOUT_PERIOD = Duration.ofHours(4)
     }
 }

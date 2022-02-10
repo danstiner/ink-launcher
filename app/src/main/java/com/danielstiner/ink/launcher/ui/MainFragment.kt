@@ -66,12 +66,17 @@ class MainFragment : Fragment() {
         binding.actionButton2.setOnTouchListener(globalSwipeDetector)
 
         binding.actionButton3.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.LISTEN.id))
+            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.CAPTURE.id))
         }
         binding.actionButton3.setOnTouchListener(globalSwipeDetector)
 
-        binding.actionButton4.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.CAPTURE.id))
+        viewModel.recent.observe(this) { recent ->
+
+            binding.actionButton4.text = recent.label
+
+            binding.actionButton4.setOnClickListener {
+                viewModel.launchApp(recent, requireContext())
+            }
         }
         binding.actionButton4.setOnTouchListener(globalSwipeDetector)
 

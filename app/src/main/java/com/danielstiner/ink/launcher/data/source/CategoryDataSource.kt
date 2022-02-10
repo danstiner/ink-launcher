@@ -1,20 +1,24 @@
-package com.danielstiner.ink.launcher.data
+package com.danielstiner.ink.launcher.data.source
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.ResolveInfo
 import android.os.Build
 import com.danielstiner.ink.launcher.data.model.AppCategory
 
-class CategoryRepository {
+class CategoryDataSource {
 
-    fun categorize(info: ResolveInfo): AppCategory {
-        val packageName = info.activityInfo.packageName
-        return when {
+    fun categorize(info: ResolveInfo) =
+        categorize(
+            info.activityInfo.packageName,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) info.activityInfo.applicationInfo.category else null
+        )
+
+    fun categorize(packageName: String, applicationInfoCategory: Int? = null) =
+        when {
             packageName in packageToCategory -> packageToCategory[packageName]!!
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && info.activityInfo.applicationInfo.category in categoryToCategory -> categoryToCategory[info.activityInfo.applicationInfo.category]!!
+            applicationInfoCategory in categoryToCategory -> categoryToCategory[applicationInfoCategory]!!
             else -> AppCategory.UNDEFINED
         }
-    }
 
     companion object {
         val categoryToCategory = mapOf(

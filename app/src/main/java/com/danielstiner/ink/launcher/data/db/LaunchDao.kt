@@ -21,4 +21,8 @@ interface LaunchDao {
     @Query("SELECT * FROM launches")
     fun getAll(): List<Launch>
 
+    @WorkerThread
+    @Query("SELECT * FROM launches ORDER BY id DESC LIMIT :limit")
+    fun getRecent(limit: Int): List<Launch>
+
 }

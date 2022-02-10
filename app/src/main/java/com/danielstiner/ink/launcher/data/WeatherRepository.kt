@@ -5,7 +5,7 @@ import com.danielstiner.ink.launcher.data.model.Weather
 import com.danielstiner.ink.launcher.data.source.TomorrowIo
 
 class WeatherRepository {
-    val tomorrowIo = TomorrowIo()
+    private val tomorrowIo = TomorrowIo()
 
     suspend fun fetch(location: LatLng): Weather? {
         return tomorrowIo.fetchWeather(location)

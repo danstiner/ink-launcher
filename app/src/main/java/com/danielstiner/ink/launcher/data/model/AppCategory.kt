@@ -61,20 +61,20 @@ data class AppCategory(val id: Int, val label: String) {
 
         // All
         val ALL = listOf(
-//            CAPTURE, // Already on home fragment
-//            GO, // Already on home fragment
-//            LISTEN, // Already on home fragment
-//            MESSAGE, // Already on home fragment
-//            WORKOUT, // Already on home fragment
             CALL,
+            CAPTURE,
             CREATE,
             GAME,
+            GO,
             LEARN,
+            LISTEN,
+            MESSAGE,
             PLAN,
             SOCIAL,
+            UNDEFINED,
             WATCH,
             WELLBEING,
-            UNDEFINED,
+            WORKOUT,
         )
     }
 }

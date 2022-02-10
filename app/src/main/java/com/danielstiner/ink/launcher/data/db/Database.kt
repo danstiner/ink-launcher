@@ -40,6 +40,8 @@ abstract class Database : RoomDatabase() {
     }
 
     @RenameTable(fromTableName = "launch_dates", toTableName = "launches")
+    @DeleteColumn(tableName = "launch_dates", columnName = "action")
+    @DeleteColumn(tableName = "launch_dates", columnName = "category")
     class Migration1To2 : AutoMigrationSpec
 
 }

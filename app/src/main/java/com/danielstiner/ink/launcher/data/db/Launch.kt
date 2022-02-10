@@ -8,8 +8,6 @@ import java.time.Instant
 @Entity(tableName = "launches")
 data class Launch(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    @ColumnInfo(name = "package") val packageName: String?,
-    @ColumnInfo(name = "category") val category: String?,
-    @ColumnInfo(name = "action") val action: String?,
+    @ColumnInfo(name = "package") val packageName: String,
     @ColumnInfo(name = "at") val at: Instant,
 )
