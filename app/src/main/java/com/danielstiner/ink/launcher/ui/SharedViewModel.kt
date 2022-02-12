@@ -66,6 +66,7 @@ class SharedViewModel(
         viewModelScope.launch {
             refreshRecentApps()
         }
+
         // Keep local date updated
         // TODO take into account timezone changes
         viewModelScope.launch {
@@ -194,7 +195,7 @@ class SharedViewModel(
 
     companion object {
         private const val TAG = "SharedViewModel"
-        private val APPLIST_REFRESH_PERIOD = Duration.ofHours(1)
+        private val APPLIST_REFRESH_PERIOD = Duration.ofHours(12)
         private val WEATHER_REFRESH_PERIOD = Duration.ofMinutes(30)
         private val WEATHER_TIMEOUT_PERIOD = Duration.ofHours(4)
     }
