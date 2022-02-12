@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.danielstiner.ink.launcher.databinding.FragmentQuickBinding
 import com.danielstiner.ink.launcher.ui.SharedViewModel
 import com.danielstiner.ink.launcher.ui.SharedViewModelFactory
-import com.danielstiner.ink.launcher.ui.category.CategoryFragmentDirections
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
@@ -37,7 +36,7 @@ class QuickFragment : Fragment() {
             mostUsed.getOrNull(0)?.let { app ->
                 binding.actionButton4.text = app.label
                 binding.actionButton4.setOnClickListener {
-                    findNavController().navigate(CategoryFragmentDirections.actionToMain())
+                    findNavController().navigate(QuickFragmentDirections.actionToMain())
                     viewModel.launchApp(app, requireContext())
                 }
             }
@@ -45,7 +44,7 @@ class QuickFragment : Fragment() {
             mostUsed.getOrNull(1)?.let { app ->
                 binding.actionButton3.text = app.label
                 binding.actionButton3.setOnClickListener {
-                    findNavController().navigate(CategoryFragmentDirections.actionToMain())
+                    findNavController().navigate(QuickFragmentDirections.actionToMain())
                     viewModel.launchApp(app, requireContext())
                 }
             }
@@ -53,7 +52,7 @@ class QuickFragment : Fragment() {
             mostUsed.getOrNull(2)?.let { app ->
                 binding.actionButton2.text = app.label
                 binding.actionButton2.setOnClickListener {
-                    findNavController().navigate(CategoryFragmentDirections.actionToMain())
+                    findNavController().navigate(QuickFragmentDirections.actionToMain())
                     viewModel.launchApp(app, requireContext())
                 }
             }
@@ -61,7 +60,7 @@ class QuickFragment : Fragment() {
             mostUsed.getOrNull(3)?.let { app ->
                 binding.actionButton1.text = app.label
                 binding.actionButton1.setOnClickListener {
-                    findNavController().navigate(CategoryFragmentDirections.actionToMain())
+                    findNavController().navigate(QuickFragmentDirections.actionToMain())
                     viewModel.launchApp(app, requireContext())
                 }
             }

@@ -65,6 +65,13 @@
         android:id="@+id/recent"
         android:name="com.danielstiner.ink.launcher.ui.quick.QuickFragment"
         android:label="workout"
-        tools:layout="@layout/fragment_quick"></fragment>
+        tools:layout="@layout/fragment_quick">
+
+        <action
+            android:id="@+id/action_to_main"
+            app:destination="@id/main"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/main" />
+    </fragment>
 
 </navigation>
