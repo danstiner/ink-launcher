@@ -153,7 +153,7 @@ class SharedViewModel(
     }
 
     @MainThread
-    private fun launchIntent(intent: Intent, context: Context) {
+    fun launchIntent(intent: Intent, context: Context) {
         context.startActivity(intent)
     }
 

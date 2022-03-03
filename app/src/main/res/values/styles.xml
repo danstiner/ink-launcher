@@ -10,11 +10,11 @@
     </style>
 
     <style name="ActionButton" parent="Widget.Material3.Button.TextButton">
-        <item name="android:textSize">@dimen/m3_sys_typescale_display_medium_text_size</item>
+        <item name="android:textSize">@dimen/m3_sys_typescale_display_small_text_size</item>
     </style>
 
     <style name="IconButton" parent="Widget.Material3.Button.IconButton">
-        <item name="iconSize">32dp</item>
+        <item name="iconSize">38dp</item>
     </style>
 
 <!--    <style name="ThemeOverlay.Actionbar">-->

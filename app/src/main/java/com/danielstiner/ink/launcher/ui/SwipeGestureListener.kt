@@ -1,5 +1,6 @@
 package com.danielstiner.ink.launcher.ui
 
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 
@@ -8,11 +9,21 @@ abstract class SwipeGestureListener : GestureDetector.SimpleOnGestureListener() 
     abstract fun onSwipe(direction: Direction): Boolean
 
     override fun onFling(
-        e1: MotionEvent,
-        e2: MotionEvent,
+        e1: MotionEvent?,
+        e2: MotionEvent?,
         velocityX: Float,
         velocityY: Float
     ): Boolean {
+
+        if (e1 == null) {
+            Log.e(TAG, "e1 == null");
+            return false
+        }
+
+        if (e2 == null) {
+            Log.e(TAG, "e2 == null");
+            return false
+        }
 
         // Grab two events located on the plane at e1=(x1, y1) and e2=(x2, y2)
         // Let e1 be the initial event
@@ -109,5 +120,9 @@ abstract class SwipeGestureListener : GestureDetector.SimpleOnGestureListener() 
                 return angle >= init && angle < end
             }
         }
+    }
+
+    companion object {
+        private const val TAG = "SwipeGestureListener"
     }
 }

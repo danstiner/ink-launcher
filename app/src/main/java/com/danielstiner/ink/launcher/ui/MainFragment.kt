@@ -2,7 +2,7 @@ package com.danielstiner.ink.launcher.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.format.DateFormat.getMediumDateFormat
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,11 +32,10 @@ class MainFragment : Fragment() {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         val root = binding.root
 
-        val dateFormat = getMediumDateFormat(requireContext())
         val globalSwipeDetector = GlobalSwipeDetector(requireContext(), findNavController())
 
         viewModel.localDate.observe(this) { date ->
-            binding.dateText.text = dateFormat.format(date)
+            binding.dateText.text = DateFormat.format("EE, MMM d", date)
         }
         binding.dateText.setOnClickListener {
             viewModel.launchSelector(
@@ -56,41 +55,41 @@ class MainFragment : Fragment() {
         binding.weatherText.setOnTouchListener(globalSwipeDetector)
 
         binding.actionButton1.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.GO.id))
+            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.PLAN.id))
         }
         binding.actionButton1.setOnTouchListener(globalSwipeDetector)
 
         binding.actionButton2.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionToWorkout())
+            viewModel.launchPackage("com.google.android.keep", requireContext())
         }
         binding.actionButton2.setOnTouchListener(globalSwipeDetector)
 
         binding.actionButton3.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.PLAN.id))
+            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.MESSAGE.id))
         }
         binding.actionButton3.setOnTouchListener(globalSwipeDetector)
 
         binding.actionButton4.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.CAPTURE.id))
+            findNavController().navigate(MainFragmentDirections.actionToWorkout())
         }
         binding.actionButton4.setOnTouchListener(globalSwipeDetector)
 
         binding.bottomLeftButton.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.MESSAGE.id))
+            viewModel.launchPackage("com.google.android.apps.maps", requireContext())
         }
         binding.bottomLeftButton.setOnTouchListener(globalSwipeDetector)
 
         binding.bottomCenterButton.setOnClickListener {
+            viewModel.launchPackage("com.habitrpg.android.habitica", requireContext())
+        }
+        binding.bottomCenterButton.setOnTouchListener(globalSwipeDetector)
+
+        binding.bottomRightButton.setOnClickListener {
             viewModel.launchSelector(
                 Intent.ACTION_MAIN,
                 Intent.CATEGORY_APP_MUSIC,
                 requireContext()
             )
-        }
-        binding.bottomCenterButton.setOnTouchListener(globalSwipeDetector)
-
-        binding.bottomRightButton.setOnClickListener {
-            viewModel.launchSelector(Intent.ACTION_DIAL, Intent.CATEGORY_DEFAULT, requireContext())
         }
         binding.bottomRightButton.setOnTouchListener(globalSwipeDetector)
 

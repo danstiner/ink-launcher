@@ -26,10 +26,6 @@ class GlobalSwipeDetector(context: Context, navController: NavController) :
                     navController.navigate(R.id.categories)
                     true
                 }
-                Direction.LEFT -> {
-                    navController.navigate(R.id.recent)
-                    true
-                }
                 else -> false
             }
         }

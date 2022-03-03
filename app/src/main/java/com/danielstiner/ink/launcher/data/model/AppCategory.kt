@@ -6,74 +6,65 @@ package com.danielstiner.ink.launcher.data.model
 data class AppCategory(val id: Int, val label: String) {
 
     companion object {
-        // Sub-categories of ApplicationInfo.CATEGORY_ACCESSIBILITY
-
-        // Sub-categories of ApplicationInfo.CATEGORY_MUSIC
+        // Categories
+        val CREATE = AppCategory(1, label = "Create")
         val LISTEN = AppCategory(2, label = "Listen")
-
-        // Sub-categories of ApplicationInfo.CATEGORY_GAME
-        val GAME = AppCategory(3, label = "Game")
-
-        // Sub-categories of ApplicationInfo.CATEGORY_IMAGE
+        val PLAY = AppCategory(3, label = "Play")
         val CAPTURE = AppCategory(4, label = "Capture")
+        val EXPLORE = AppCategory(5, label = "Explore")
 
-        // Sub-categories of ApplicationInfo.CATEGORY_MAPS
-        val GO = AppCategory(5, label = "Go")
-
-        // Sub-categories of ApplicationInfo.CATEGORY_NEWS
-
-        // Sub-categories of
-
-        // Sub-categories of ApplicationInfo.CATEGORY_SOCIAL
+        //        val HEALTH = AppCategory(6, label = "Health")
+        // Unused 7
         val MESSAGE = AppCategory(8, label = "Message")
         val SOCIAL = AppCategory(9, label = "Socialize")
 
-        // Sub-categories of ApplicationInfo.CATEGORY_UNDEFINED
+        // Unused 10
         val UNDEFINED = AppCategory(11, label = "Other")
         val WORKOUT = AppCategory(12, label = "Workout")
+
+        // Unused 13
         val LEARN = AppCategory(14, label = "Learn")
         val HIDE = AppCategory(15, label = "Hidden")
+
+        // Unused 16
         val CALL = AppCategory(17, label = "Call")
         val PLAN = AppCategory(18, label = "Plan")
-        val CREATE = AppCategory(1, label = "Create")
 
-        // Sub-categories of ApplicationInfo.CATEGORY_VIDEO
+        // Unused 19
         val WATCH = AppCategory(20, label = "Watch")
-
-        val WELLBEING = AppCategory(6, label = "Well-being")
 
         // Aliases
         val ACCESSIBILITY = UNDEFINED
         val AUTHENTICATE = UNDEFINED
-        val DATE = SOCIAL
-        val NOTE = CAPTURE
-        val BROWSE = UNDEFINED
-        val STAY = PLAN
-        val MEET = CALL
         val BANK = UNDEFINED
-        val READ = UNDEFINED
+        val BROWSE = UNDEFINED
         val COOK = UNDEFINED
-        val UTILITY = UNDEFINED
-        val OUTSIDE = GO
+        val DATE = SOCIAL
+        val FLY = EXPLORE
+        val HEALTH = WORKOUT
         val HIKE = WORKOUT
-        val FLY = GO
+        val MEET = CALL
         val NEWS = UNDEFINED
+        val NOTE = CAPTURE
+        val OUTSIDE = EXPLORE
+        val READ = UNDEFINED
+        val STAY = PLAN
+        val UTILITY = UNDEFINED
 
-        // All
+        // All categories in alphabetical order
         val ALL = listOf(
             CALL,
             CAPTURE,
             CREATE,
-            GAME,
-            GO,
+            EXPLORE,
             LEARN,
             LISTEN,
             MESSAGE,
             PLAN,
+            PLAY,
             SOCIAL,
             UNDEFINED,
             WATCH,
-            WELLBEING,
             WORKOUT,
         )
     }

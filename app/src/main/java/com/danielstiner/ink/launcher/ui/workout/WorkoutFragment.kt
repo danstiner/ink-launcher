@@ -1,6 +1,5 @@
 package com.danielstiner.ink.launcher.ui.workout
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,11 +38,7 @@ class WorkoutFragment : Fragment() {
         }
 
         binding.actionButton1.setOnClickListener {
-            viewModel.launchSelector(
-                Intent.ACTION_MAIN,
-                Intent.CATEGORY_APP_MUSIC,
-                requireContext()
-            )
+            viewModel.launchPackage("com.spotify.music", requireContext())
         }
 
         binding.actionButton2.setOnClickListener {
@@ -51,6 +46,10 @@ class WorkoutFragment : Fragment() {
         }
 
         binding.actionButton3.setOnClickListener {
+            viewModel.launchPackage("com.synology.DSaudio", requireContext())
+        }
+
+        binding.actionButton4.setOnClickListener {
             viewModel.launchPackage("com.strava", requireContext())
         }
 

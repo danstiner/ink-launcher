@@ -12,6 +12,6 @@ data class Weather(
 ) {
 
     fun toDisplayString(): String {
-        return "$textDescription\n${temperature.roundToInt()}° C"
+        return "${temperature.roundToInt()}° $textDescription"
     }
 }

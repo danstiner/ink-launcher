@@ -34,14 +34,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="weatherText" />
+        app:constraint_referenced_ids="dateText" />
 
     <Button
         android:id="@+id/actionButton1"
         style="@style/ActionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Go"
+        android:text="Plan"
         app:layout_constraintBottom_toTopOf="@id/actionButton2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
         style="@style/ActionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Workout"
+        android:text="Note"
         app:layout_constraintBottom_toTopOf="@id/actionButton3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
         style="@style/ActionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Plan"
+        android:text="Message"
         app:layout_constraintBottom_toTopOf="@id/actionButton4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +75,7 @@
         style="@style/ActionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Capture"
+        android:text="Workout"
         app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,8 +94,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
-        app:icon="@drawable/ic_outline_chat_bubble_outline_24"
+        android:layout_marginBottom="16dp"
+        app:icon="@drawable/ic_outline_directions_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -104,8 +104,8 @@
         style="@style/IconButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        app:icon="@drawable/ic_outline_music_note_24"
+        android:layout_marginBottom="16dp"
+        app:icon="@drawable/ic_outline_task_alt_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -116,8 +116,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        app:icon="@drawable/ic_outline_phone_24"
+        android:layout_marginBottom="16dp"
+        app:icon="@drawable/ic_outline_music_note_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
