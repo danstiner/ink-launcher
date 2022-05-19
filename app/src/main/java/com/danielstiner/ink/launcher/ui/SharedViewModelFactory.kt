@@ -20,6 +20,7 @@ class SharedViewModelFactory(private val context: Context) :
         if (modelClass.isAssignableFrom(SharedViewModel::class.java)) {
             val database = Database.getInstance(context)
             val categories = CategoryDataSource()
+            @Suppress("UNCHECKED_CAST")
             return SharedViewModel(
                 database = database,
                 appRepository = AppRepository(

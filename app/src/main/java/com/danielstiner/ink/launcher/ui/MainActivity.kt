@@ -139,22 +139,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun increaseEdgeSize(drawer: DrawerLayout) {
-        val mLeftDragger: Field = drawer.javaClass.getDeclaredField("mLeftDragger")
-        mLeftDragger.isAccessible = true
-        val leftDragger = mLeftDragger.get(drawer)
-        increaseEdgeSize(leftDragger)
-
         val mRightDragger: Field = drawer.javaClass.getDeclaredField("mRightDragger")
         mRightDragger.isAccessible = true
         val rightDragger = mRightDragger.get(drawer)
-        increaseEdgeSize(rightDragger)
+        increaseEdgeSize(rightDragger, 12)
     }
 
-    private fun increaseEdgeSize(dragger: Any) {
+    private fun increaseEdgeSize(dragger: Any, multiplier: Int) {
         val mDefaultEdgeSize: Field = dragger.javaClass.getDeclaredField("mDefaultEdgeSize")
         mDefaultEdgeSize.isAccessible = true
 
-        val edgeSize = 8 * mDefaultEdgeSize.getInt(dragger)
+        val edgeSize = multiplier * mDefaultEdgeSize.getInt(dragger)
         mDefaultEdgeSize.setInt(dragger, edgeSize)
 
         val mEdgeSize: Field = dragger.javaClass.getDeclaredField("mEdgeSize")

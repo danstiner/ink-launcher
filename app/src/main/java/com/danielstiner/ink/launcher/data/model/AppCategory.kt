@@ -9,13 +9,14 @@ data class AppCategory(val id: Int, val label: String) {
         // Categories
         val CREATE = AppCategory(1, label = "Create")
         val LISTEN = AppCategory(2, label = "Listen")
-        val PLAY = AppCategory(3, label = "Play")
-        val CAPTURE = AppCategory(4, label = "Capture")
+
+        // Unused 3 was AppCategory(3, label = "Play")
+        // Unused 4 was AppCategory(4, label = "Capture")
         val EXPLORE = AppCategory(5, label = "Explore")
 
-        //        val HEALTH = AppCategory(6, label = "Health")
+        // Unused 6 - was AppCategory(6, label = "Health")
         // Unused 7
-        val MESSAGE = AppCategory(8, label = "Message")
+        //val MESSAGE = AppCategory(8, label = "Message")
         val SOCIAL = AppCategory(9, label = "Socialize")
 
         // Unused 10
@@ -24,16 +25,21 @@ data class AppCategory(val id: Int, val label: String) {
 
         // Unused 13
         val LEARN = AppCategory(14, label = "Learn")
-        val HIDE = AppCategory(15, label = "Hidden")
+        val HIDDEN = AppCategory(15, label = "Hidden")
 
         // Unused 16
-        val CALL = AppCategory(17, label = "Call")
-        val PLAN = AppCategory(18, label = "Plan")
-
+        //val CALL = AppCategory(17, label = "Call")
+        // Unused 18 - was  AppCategory(18, label = "Plan")
         // Unused 19
-        val WATCH = AppCategory(20, label = "Watch")
+        // Unused 20 was AppCategory(20, label = "Watch")
+        val PRODUCTIVITY = AppCategory(21, label = "Productivity")
+        val CHAT = AppCategory(22, label = "Chat")
 
         // Aliases
+        val CALL = CHAT
+        val MESSAGE = CHAT
+        val PLAN = PRODUCTIVITY
+        val CAPTURE = CREATE
         val ACCESSIBILITY = UNDEFINED
         val AUTHENTICATE = UNDEFINED
         val BANK = UNDEFINED
@@ -48,23 +54,21 @@ data class AppCategory(val id: Int, val label: String) {
         val NOTE = CAPTURE
         val OUTSIDE = EXPLORE
         val READ = UNDEFINED
-        val STAY = PLAN
+        val STAY = UNDEFINED
         val UTILITY = UNDEFINED
+        val WATCH = UNDEFINED
+        val PLAY = UNDEFINED
 
         // All categories in alphabetical order
         val ALL = listOf(
-            CALL,
-            CAPTURE,
+            CHAT,
             CREATE,
             EXPLORE,
             LEARN,
             LISTEN,
-            MESSAGE,
-            PLAN,
-            PLAY,
+            PRODUCTIVITY,
             SOCIAL,
             UNDEFINED,
-            WATCH,
             WORKOUT,
         )
     }

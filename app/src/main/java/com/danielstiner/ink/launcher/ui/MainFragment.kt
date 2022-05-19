@@ -34,7 +34,7 @@ class MainFragment : Fragment() {
 
         val globalSwipeDetector = GlobalSwipeDetector(requireContext(), findNavController())
 
-        viewModel.localDate.observe(this) { date ->
+        viewModel.localDate.observe(viewLifecycleOwner) { date ->
             binding.dateText.text = DateFormat.format("EE, MMM d", date)
         }
         binding.dateText.setOnClickListener {
@@ -46,7 +46,7 @@ class MainFragment : Fragment() {
         }
         binding.dateText.setOnTouchListener(globalSwipeDetector)
 
-        viewModel.weather.observe(this) { weather ->
+        viewModel.weather.observe(viewLifecycleOwner) { weather ->
             binding.weatherText.text = weather?.toDisplayString() ?: ""
         }
         binding.weatherText.setOnClickListener {
@@ -65,7 +65,7 @@ class MainFragment : Fragment() {
         binding.actionButton2.setOnTouchListener(globalSwipeDetector)
 
         binding.actionButton3.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.MESSAGE.id))
+            findNavController().navigate(MainFragmentDirections.actionToCategory(AppCategory.CHAT.id))
         }
         binding.actionButton3.setOnTouchListener(globalSwipeDetector)
 
@@ -80,7 +80,7 @@ class MainFragment : Fragment() {
         binding.bottomLeftButton.setOnTouchListener(globalSwipeDetector)
 
         binding.bottomCenterButton.setOnClickListener {
-            viewModel.launchPackage("com.habitrpg.android.habitica", requireContext())
+            viewModel.launchPackage("com.todoist", requireContext())
         }
         binding.bottomCenterButton.setOnTouchListener(globalSwipeDetector)
 

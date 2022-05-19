@@ -32,7 +32,7 @@ class QuickFragment : Fragment() {
         val root = binding.root
 
         // Show four most used apps, ascending order
-        viewModel.mostUsed.observe(this) { mostUsed ->
+        viewModel.mostUsed.observe(viewLifecycleOwner) { mostUsed ->
             mostUsed.getOrNull(0)?.let { app ->
                 binding.actionButton4.text = app.label
                 binding.actionButton4.setOnClickListener {

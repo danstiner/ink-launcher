@@ -30,7 +30,7 @@ class WorkoutFragment : Fragment() {
         _binding = FragmentWorkoutBinding.inflate(inflater, container, false)
         val root = binding.root
 
-        viewModel.weather.observe(this) { weather ->
+        viewModel.weather.observe(viewLifecycleOwner) { weather ->
             binding.weatherText.text = weather?.toDisplayString() ?: ""
         }
         binding.weatherText.setOnClickListener {
