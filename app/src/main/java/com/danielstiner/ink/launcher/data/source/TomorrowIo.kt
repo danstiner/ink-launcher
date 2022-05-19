@@ -19,7 +19,7 @@ class TomorrowIo(private val client: OkHttpClient = OkHttpClient()) {
             .newBuilder()
             .addQueryParameter("location", "${location.latitude},${location.longitude}")
             .addQueryParameter("fields", "temperature,temperatureApparent,weatherCode")
-            .addQueryParameter("units", "metric")
+            .addQueryParameter("units", "imperial")
             .addQueryParameter("timesteps", "current")
             .build()
         val request = Request.Builder()
